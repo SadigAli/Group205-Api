@@ -8,53 +8,58 @@ namespace FirstApi.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly List<Product> products;
-        public ProductsController()
+        private readonly ApplicationContext _context;
+        public ProductsController(ApplicationContext context)
         {
-            products = new List<Product>
-            {
-                new Product { Id = 1, Title = "Test 1",Description ="Test 1",Price = 15},
-                new Product { Id = 2, Title = "Test 2",Description ="Test 2",Price = 5},
-                new Product { Id = 3, Title = "Test 3",Description ="Test 3",Price = 25},
-                new Product { Id = 4, Title = "Test 4",Description ="Test 4",Price = 55},
-            };
+            _context = context;
         }
-
         [HttpGet]
-        public IEnumerable<Product> GetProducts()
+        public IActionResult Index()
         {
-            return products;
+            List<Product> products = _context.Products.ToList();
+            if (products.Count == 0) return BadRequest(new { Message = "Data not found"});
+            return Ok(products);
         }
 
         [HttpGet("{id}")]
-        public Product GetProduct(int id) 
+
+        public IActionResult Details(int id)
         {
-            return products.FirstOrDefault(x => x.Id == id);
+            Product product = _context.Products.Find(id);
+            if(product is null) return NotFound();
+            return Ok(product);
         }
 
         [HttpPost]
 
-        public IEnumerable<Product> AddProduct(Product product)
+        public IActionResult Create(Product product)
         {
-            products.Add(product);
-            return products;
+            _context.Products.Add(product);
+            _context.SaveChanges();
+            return Created("/api/products", _context.Products.ToList());
         }
+
         [HttpPut("{id}")]
-        public Product EditProduct(int id,Product model) 
+        public IActionResult Update(int id,Product model)
         {
-            Product product = products.FirstOrDefault(x => x.Id == id);
-            product.Title = model.Title;
-            product.Description = model.Description;
+            Product product = _context.Products.Find(id);
+            if (product is null) return NotFound();
+            product.Title= model.Title;
             product.Price = model.Price;
-            return product;
+            product.Description = model.Description;
+            product.Count = model.Count;
+            _context.SaveChanges();
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IEnumerable<Product> DeleteProduct(int id)
+        public IActionResult Delete(int id)
         {
-            Product product = products.FirstOrDefault(x => x.Id==id);
-            products.Remove(product);
-            return products;
+            Product product = _context.Products.Find(id);
+            if (product is null) return NotFound();
+            _context.Products.Remove(product);
+            _context.SaveChanges();
+            return NoContent();
         }
     }
 }

@@ -1,3 +1,6 @@
+using FirstApi.Entities;
+using Microsoft.EntityFrameworkCore;
+
 namespace FirstApi
 {
     public class Program
@@ -12,6 +15,10 @@ namespace FirstApi
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddDbContext<ApplicationContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection"));
+            });
 
             var app = builder.Build();
 
