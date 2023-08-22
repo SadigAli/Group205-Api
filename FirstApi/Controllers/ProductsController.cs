@@ -1,6 +1,7 @@
 ﻿using FirstApi.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FirstApi.Controllers
 {
@@ -16,7 +17,7 @@ namespace FirstApi.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<Product> products = _context.Products.ToList();
+            List<Product> products = _context.Products.Include(x=>x.Category).ToList();
             if (products.Count == 0) return BadRequest(new { Message = "Data not found"});
             return Ok(products);
         }

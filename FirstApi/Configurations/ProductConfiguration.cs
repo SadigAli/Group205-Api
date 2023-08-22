@@ -12,10 +12,10 @@ namespace FirstApi.Configurations
                 new Product
                 {
                     Id = 1,
-                    Title = "Product 1",
-                    Description = "Description",
-                    Price = 10.05,
-                    Count = 10,
+                    Title = "It",
+                    Description = "Adi Toplandir",
+                    Price = 800,
+                    Count = 1,
                 },
                 new Product
                 {

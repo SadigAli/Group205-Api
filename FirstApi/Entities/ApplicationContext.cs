@@ -10,11 +10,15 @@ namespace FirstApi.Entities
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Color> Colors { get; set; }
+        public DbSet<ProductColor> ProductColors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfiguration<Product>(new ProductConfiguration());
+            //modelBuilder.ApplyConfiguration<Product>(new ProductConfiguration());
+            //modelBuilder.ApplyConfiguration<Category>(new CategoryConfiguration());
             //modelBuilder.Entity<Product>().HasData(
             //    new Product
             //    {
