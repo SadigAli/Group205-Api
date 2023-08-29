@@ -1,5 +1,6 @@
 ﻿using FirstApi.DTOs.Product;
 using FirstApi.Entities;
+using FirstApi.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,11 +13,12 @@ namespace FirstApi.Controllers
     {
         private readonly ApplicationContext _context;
         private readonly IWebHostEnvironment _env;
-        public ProductsController(ApplicationContext context, IWebHostEnvironment env)
+        private readonly FileService _fileService;
+        public ProductsController(ApplicationContext context, IWebHostEnvironment env,FileService fileService)
         {
             _context = context;
             _env = env;
-
+            _fileService = fileService;
         }
         [HttpGet]
         public IActionResult Index()
@@ -75,15 +77,8 @@ namespace FirstApi.Controllers
                     return BadRequest(new { Message = "File's length must be less than 500kb" });
                 if (!model.File.ContentType.Contains("image")) // image/png,image/jpeg,image/svg
                     return BadRequest(new { Message = "File's format must be an image" });
-                string filePath = Path.Combine(_env.WebRootPath, "uploads", "products");
-                string fileName = Guid.NewGuid().ToString() + "_" + model.File.FileName;
-                string fullPath = Path.Combine(filePath, fileName);
-                // C:/geksgjh/FirstApi/wwwroot/uploads/products/filename
-                using (FileStream stream = new FileStream(fullPath, FileMode.Create))
-                {
-                    await model.File.CopyToAsync(stream);
-                }
-                product.Image = fileName;
+
+                product.Image = await _fileService.FileUpload(_env.WebRootPath, "products", model.File) ;
             }
             _context.Products.Add(product);
             product.ProductColors = new List<ProductColor>();
@@ -99,7 +94,7 @@ namespace FirstApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id,Product model)
+        public async Task<IActionResult> Update(int id,[FromForm]ProductPostDTO model)
         {
             Product product = _context.Products.Find(id);
             if (product is null) return NotFound();
@@ -107,6 +102,15 @@ namespace FirstApi.Controllers
             product.Price = model.Price;
             product.Description = model.Description;
             product.Count = model.Count;
+            if(model.File != null)
+            {
+                if (model.File.Length / 1024 > 500)
+                    return BadRequest(new { Message = "File's length must be less than 500kb" });
+                if (!model.File.ContentType.Contains("image")) // image/png,image/jpeg,image/svg
+                    return BadRequest(new { Message = "File's format must be an image" });
+                _fileService.FileDelete(_env.WebRootPath, product.Image, "products");
+                product.Image = await _fileService.FileUpload(_env.WebRootPath, "products", model.File);
+            }
             _context.SaveChanges();
             return NoContent();
         }
@@ -116,6 +120,7 @@ namespace FirstApi.Controllers
         {
             Product product = _context.Products.Find(id);
             if (product is null) return NotFound();
+            _fileService.FileDelete(_env.WebRootPath, product.Image, "products");
             _context.Products.Remove(product);
             _context.SaveChanges();
             return NoContent();

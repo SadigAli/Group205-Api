@@ -1,4 +1,5 @@
 using FirstApi.Entities;
+using FirstApi.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace FirstApi
@@ -22,6 +23,7 @@ namespace FirstApi
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection"));
             });
+            builder.Services.AddScoped<FileService>();
 
             var app = builder.Build();
 

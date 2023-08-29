@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\FirstApi\\wwwroot\\uploads\\products\\43f24bd1-3e1c-4068-852b-2da09f546496_qarpiz-3.jpg",
+      "PackagePath": "staticwebassets\\uploads\\products\\43f24bd1-3e1c-4068-852b-2da09f546496_qarpiz-3.jpg"
+    },
+    {
       "Id": "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\FirstApi\\wwwroot\\uploads\\products\\9e0910be-e1c1-4dc2-939f-a4433a15234d_qarpiz.jpg",
       "PackagePath": "staticwebassets\\uploads\\products\\9e0910be-e1c1-4dc2-939f-a4433a15234d_qarpiz.jpg"
     },

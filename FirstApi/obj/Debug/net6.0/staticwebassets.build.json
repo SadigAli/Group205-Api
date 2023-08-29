@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "xFC6goD2x6kGDKbCRleV4GPR9aMMCk//jXCyMKy51cs=",
+  "Hash": "rVaSYUPwkfbNBfc6zGEfNCNMSXkoD6Wu6YcSExagDD0=",
   "Source": "FirstApi",
   "BasePath": "_content/FirstApi",
   "Mode": "Default",
@@ -15,23 +15,5 @@
       "Pattern": "**"
     }
   ],
-  "Assets": [
-    {
-      "Identity": "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\FirstApi\\wwwroot\\uploads\\products\\9e0910be-e1c1-4dc2-939f-a4433a15234d_qarpiz.jpg",
-      "SourceId": "FirstApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\FirstApi\\wwwroot\\",
-      "BasePath": "_content/FirstApi",
-      "RelativePath": "uploads/products/9e0910be-e1c1-4dc2-939f-a4433a15234d_qarpiz.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\products\\9e0910be-e1c1-4dc2-939f-a4433a15234d_qarpiz.jpg"
-    }
-  ]
+  "Assets": []
 }
