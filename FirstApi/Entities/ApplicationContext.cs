@@ -14,6 +14,8 @@ namespace FirstApi.Entities
         public DbSet<Color> Colors { get; set; }
         public DbSet<ProductColor> ProductColors { get; set; }
         public DbSet<Basket> Baskets { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderProduct> OrderProducts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,0 +1,14 @@
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Data\bin\Debug\net6.0\Library.Data.deps.json
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Data\bin\Debug\net6.0\Library.Data.dll
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Data\bin\Debug\net6.0\Library.Data.pdb
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Data\obj\Debug\net6.0\Library.Data.csproj.AssemblyReference.cache
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Data\obj\Debug\net6.0\Library.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Data\obj\Debug\net6.0\Library.Data.AssemblyInfoInputs.cache
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Data\obj\Debug\net6.0\Library.Data.AssemblyInfo.cs
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Data\obj\Debug\net6.0\Library.Data.csproj.CoreCompileInputs.cache
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Data\obj\Debug\net6.0\Library.Data.dll
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Data\obj\Debug\net6.0\refint\Library.Data.dll
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Data\obj\Debug\net6.0\Library.Data.pdb
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Data\obj\Debug\net6.0\ref\Library.Data.dll
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Data\bin\Debug\net6.0\Library.Data.runtimeconfig.json
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Data\obj\Debug\net6.0\Library.Data.genruntimeconfig.cache
