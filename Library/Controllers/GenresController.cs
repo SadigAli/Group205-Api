@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Library.Data.Entities;
+using Library.Data.DTOs.Genre;
+using AutoMapper;
 
 namespace Library.Controllers
 {
@@ -14,26 +16,41 @@ namespace Library.Controllers
     public class GenresController : ControllerBase
     {
         private readonly ApplicationContext _context;
+        private readonly IMapper _mapper;
 
-        public GenresController(ApplicationContext context)
+        public GenresController(ApplicationContext context,IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Genres
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Genre>>> GetGenres()
+        public async Task<ActionResult> GetGenres()
         {
           if (_context.Genres == null)
           {
               return NotFound();
           }
-            return await _context.Genres.ToListAsync();
+            List<Genre> genres = await _context.Genres.Where(x=>x.DeletedAt == null).ToListAsync();
+            #region Manual Mapper
+            //List<GenreGetDTO> data = new List<GenreGetDTO>();
+            //foreach (var genre in genres)
+            //{
+            //    data.Add(new GenreGetDTO
+            //    {
+            //        Id = genre.Id,
+            //        Name = genre.Name,
+            //    });
+            //}
+            #endregion
+            var data = _mapper.Map<List<GenreGetDTO>>(genres);
+            return Ok(data);
         }
 
         // GET: api/Genres/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Genre>> GetGenre(int id)
+        public async Task<ActionResult> GetGenre(int id)
         {
           if (_context.Genres == null)
           {
@@ -46,19 +63,25 @@ namespace Library.Controllers
                 return NotFound();
             }
 
-            return genre;
+            #region Manual Mapper
+            //GenreGetDTO data = new GenreGetDTO
+            //{
+            //    Id = genre.Id,
+            //    Name = genre.Name,
+            //};
+            #endregion
+            var data = _mapper.Map<GenreGetDTO>(genre);
+
+            return Ok(data);
         }
 
         // PUT: api/Genres/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGenre(int id, Genre genre)
+        public async Task<IActionResult> PutGenre(int id, GenreGetDTO model)
         {
-            if (id != genre.Id)
-            {
-                return BadRequest();
-            }
-
+            Genre genre = await _context.Genres.Where(x=>x.DeletedAt==null).FirstOrDefaultAsync(x=>x.Id ==id);
+            genre.Name = model.Name;
             genre.UpdatedAt = DateTime.Now;
             _context.Entry(genre).State = EntityState.Modified;
 
@@ -84,16 +107,24 @@ namespace Library.Controllers
         // POST: api/Genres
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Genre>> PostGenre(Genre genre)
+        public async Task<ActionResult> PostGenre(GenrePostDTO model)
         {
           if (_context.Genres == null)
           {
               return Problem("Entity set 'ApplicationContext.Genres'  is null.");
           }
+            #region Manual Mapper
+            //Genre genre = new Genre
+            //{
+            //    Name = model.Name,
+            //};
+            #endregion
+
+            Genre genre = _mapper.Map<Genre>(model);
             _context.Genres.Add(genre);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetGenre", new { id = genre.Id }, genre);
+            return CreatedAtAction("GetGenre", new { id = genre.Id }, model);
         }
 
         // DELETE: api/Genres/5

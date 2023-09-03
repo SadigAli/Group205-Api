@@ -1,4 +1,5 @@
 using Library.Data.Entities;
+using Library.Data.Mappers;
 using Microsoft.EntityFrameworkCore;
 
 namespace Library
@@ -15,6 +16,7 @@ namespace Library
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddAutoMapper(typeof(MapProfile));
             builder.Services.AddDbContext<ApplicationContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection"));
