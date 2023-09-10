@@ -13,6 +13,8 @@ namespace Library.Data.Entities
 
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Author> Authors { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<BookAuthor> BookAuthors { get; set; }
     }
 
     public class DbContextFactory : IDesignTimeDbContextFactory<ApplicationContext>

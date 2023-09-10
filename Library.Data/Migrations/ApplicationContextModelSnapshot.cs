@@ -52,6 +52,74 @@ namespace Library.Data.Migrations
                     b.ToTable("Authors");
                 });
 
+            modelBuilder.Entity("Library.Data.Entities.Book", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Page")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("Library.Data.Entities.BookAuthor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("BookAuthors");
+                });
+
             modelBuilder.Entity("Library.Data.Entities.Genre", b =>
                 {
                     b.Property<int>("Id")
@@ -76,6 +144,35 @@ namespace Library.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
+                });
+
+            modelBuilder.Entity("Library.Data.Entities.BookAuthor", b =>
+                {
+                    b.HasOne("Library.Data.Entities.Author", "Author")
+                        .WithMany("BookAuthors")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Library.Data.Entities.Book", "Book")
+                        .WithMany("BookAuthors")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Book");
+                });
+
+            modelBuilder.Entity("Library.Data.Entities.Author", b =>
+                {
+                    b.Navigation("BookAuthors");
+                });
+
+            modelBuilder.Entity("Library.Data.Entities.Book", b =>
+                {
+                    b.Navigation("BookAuthors");
                 });
 #pragma warning restore 612, 618
         }

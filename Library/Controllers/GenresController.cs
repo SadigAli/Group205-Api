@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Library.Data.Entities;
 using Library.Data.DTOs.Genre;
 using AutoMapper;
+using Library.Repository.Contracts;
 
 namespace Library.Controllers
 {
@@ -15,24 +16,24 @@ namespace Library.Controllers
     [ApiController]
     public class GenresController : ControllerBase
     {
-        private readonly ApplicationContext _context;
         private readonly IMapper _mapper;
+        private readonly IGenreRepository _genreRepository;
 
-        public GenresController(ApplicationContext context,IMapper mapper)
+        public GenresController(IMapper mapper,IGenreRepository genreRepository)
         {
-            _context = context;
             _mapper = mapper;
+            _genreRepository = genreRepository;
         }
 
         // GET: api/Genres
         [HttpGet]
         public async Task<ActionResult> GetGenres()
         {
-          if (_context.Genres == null)
+          if (await _genreRepository.GetAll() == null)
           {
               return NotFound();
           }
-            List<Genre> genres = await _context.Genres.Where(x=>x.DeletedAt == null).ToListAsync();
+            List<Genre> genres = await _genreRepository.GetAll();
             #region Manual Mapper
             //List<GenreGetDTO> data = new List<GenreGetDTO>();
             //foreach (var genre in genres)
@@ -52,11 +53,11 @@ namespace Library.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult> GetGenre(int id)
         {
-          if (_context.Genres == null)
-          {
-              return NotFound();
-          }
-            var genre = await _context.Genres.Where(x=>x.DeletedAt == null).FirstOrDefaultAsync(x=>x.Id ==id);
+            if (await _genreRepository.GetAll() == null)
+            {
+                return NotFound();
+            }
+            var genre = await _genreRepository.GetById(id);
 
             if (genre == null)
             {
@@ -80,18 +81,17 @@ namespace Library.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGenre(int id, GenreGetDTO model)
         {
-            Genre genre = await _context.Genres.Where(x=>x.DeletedAt==null).FirstOrDefaultAsync(x=>x.Id ==id);
-            genre.Name = model.Name;
-            genre.UpdatedAt = DateTime.Now;
-            _context.Entry(genre).State = EntityState.Modified;
-
+            Genre genre = await _genreRepository.GetById(id);
+            //genre.Name = model.Name;
+            //genre.UpdatedAt = DateTime.Now;
+            _genreRepository.Update(genre);
             try
             {
-                await _context.SaveChangesAsync();
+                await _genreRepository.Save();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!GenreExists(id))
+                if (!await GenreExists(id))
                 {
                     return NotFound();
                 }
@@ -109,10 +109,10 @@ namespace Library.Controllers
         [HttpPost]
         public async Task<ActionResult> PostGenre(GenrePostDTO model)
         {
-          if (_context.Genres == null)
-          {
-              return Problem("Entity set 'ApplicationContext.Genres'  is null.");
-          }
+            if (await _genreRepository.GetAll() == null)
+            {
+                return NotFound();
+            }
             #region Manual Mapper
             //Genre genre = new Genre
             //{
@@ -121,9 +121,8 @@ namespace Library.Controllers
             #endregion
 
             Genre genre = _mapper.Map<Genre>(model);
-            _context.Genres.Add(genre);
-            await _context.SaveChangesAsync();
-
+            await _genreRepository.Add(genre);
+            await _genreRepository.Save();
             return CreatedAtAction("GetGenre", new { id = genre.Id }, model);
         }
 
@@ -131,25 +130,25 @@ namespace Library.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGenre(int id)
         {
-            if (_context.Genres == null)
+            if (await _genreRepository.GetAll() == null)
             {
                 return NotFound();
             }
-            var genre = await _context.Genres.Where(x=>x.DeletedAt == null).FirstOrDefaultAsync(x=>x.Id == id);
+            var genre = await _genreRepository.GetById(id);
             if (genre == null)
             {
                 return NotFound();
             }
 
-            genre.DeletedAt = DateTime.Now;
-            await _context.SaveChangesAsync();
+            _genreRepository.Delete(genre);
+            await _genreRepository.Save();
 
             return NoContent();
         }
 
-        private bool GenreExists(int id)
+        private async Task<bool> GenreExists(int id)
         {
-            return (_context.Genres?.Any(e => e.Id == id)).GetValueOrDefault();
+            return await _genreRepository.IsExists(id);
         }
     }
 }

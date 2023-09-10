@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Library.Data.Entities;
 using AutoMapper;
 using Library.Data.DTOs.Author;
+using Library.Repository.Contracts;
 
 namespace Library.Controllers
 {
@@ -17,25 +18,25 @@ namespace Library.Controllers
     {
         private readonly ApplicationContext _context;
         private readonly IMapper _mapper;
+        private readonly IAuthorRepository _authorRepository;
 
-        public AuthorsController(ApplicationContext context,IMapper mapper)
+        public AuthorsController(ApplicationContext context, IMapper mapper, IAuthorRepository authorRepository)
         {
             _context = context;
             _mapper = mapper;
+            _authorRepository = authorRepository;
         }
 
         // GET: api/Authors
         [HttpGet]
         public async Task<ActionResult> GetAuthors()
         {
-          if (_context.Authors == null)
-          {
-              return NotFound();
-          }
+            if (await _authorRepository.GetAll() == null)
+            {
+                return NotFound();
+            }
 
-            List<Author> authors = await _context.Authors
-                    .Where(x=>x.DeletedAt == null)
-                    .ToListAsync();
+            List<Author> authors = await _authorRepository.GetAll();
             var data = _mapper.Map<List<AuthorGetDTO>>(authors);
             return Ok(data);
         }
@@ -44,13 +45,11 @@ namespace Library.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult> GetAuthor(int id)
         {
-          if (_context.Authors == null)
-          {
-              return NotFound();
-          }
-            var author = await _context.Authors
-                .Where(x=>x.DeletedAt == null)
-                .FirstOrDefaultAsync(x=>x.Id == id);
+            if (await _authorRepository.GetAll() == null)
+            {
+                return NotFound();
+            }
+            var author = await _authorRepository.GetAuthorDetails(id);
 
             if (author == null)
             {
@@ -71,21 +70,18 @@ namespace Library.Controllers
                 return BadRequest();
             }
 
-            //Author author = _mapper.Map<Author>(model);
-            Author author = await _context.Authors.FirstOrDefaultAsync(x => x.Id == id);
+            Author author = await _authorRepository.GetById(id);
             author.Firstname = model.Firstname;
             author.Lastname = model.Lastname;
             author.UpdatedAt = DateTime.Now;
 
-            _context.Entry(author).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _authorRepository.Save();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AuthorExists(id))
+                if (!await AuthorExists(id))
                 {
                     return NotFound();
                 }
@@ -103,13 +99,13 @@ namespace Library.Controllers
         [HttpPost]
         public async Task<ActionResult> PostAuthor(AuthorPostDTO model)
         {
-          if (_context.Authors == null)
-          {
-              return Problem("Entity set 'ApplicationContext.Authors'  is null.");
-          }
+            if (await _authorRepository.GetAll() == null)
+            {
+                return NotFound();
+            }
             Author author = _mapper.Map<Author>(model);
-            _context.Authors.Add(author);
-            await _context.SaveChangesAsync();
+            await _authorRepository.Add(author);
+            await _authorRepository.Save();
 
             return CreatedAtAction("GetAuthor", new { id = author.Id }, model);
         }
@@ -118,28 +114,26 @@ namespace Library.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAuthor(int id)
         {
-            if (_context.Authors == null)
+            if (await _authorRepository.GetAll() == null)
             {
                 return NotFound();
             }
-            var author = await _context.Authors
-                    .Where(x=>x.DeletedAt == null)
-                    .FirstOrDefaultAsync(x => x.Id == id);
-                
-                    ;
+            var author = await _authorRepository.GetById(id);
+
             if (author == null)
             {
                 return NotFound();
             }
-            author.DeletedAt = DateTime.Now;
-            await _context.SaveChangesAsync();
+            _authorRepository.Delete(author);
+            await _authorRepository.Save();
+
 
             return NoContent();
         }
 
-        private bool AuthorExists(int id)
+        private async Task<bool> AuthorExists(int id)
         {
-            return (_context.Authors?.Any(e => e.Id == id)).GetValueOrDefault();
+            return await _authorRepository.IsExists(id);
         }
     }
 }

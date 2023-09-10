@@ -1,5 +1,8 @@
+using FluentValidation;
 using Library.Data.Entities;
 using Library.Data.Mappers;
+using Library.Repository.Contracts;
+using Library.Repository.Implementations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Library
@@ -12,16 +15,23 @@ namespace Library
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                }); ;
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(typeof(MapProfile));
+            builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+            builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
             builder.Services.AddDbContext<ApplicationContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection"));
             });
 
+            builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -33,6 +43,7 @@ namespace Library
 
             app.UseHttpsRedirection();
 
+            app.UseStaticFiles();
             app.UseAuthorization();
 
 

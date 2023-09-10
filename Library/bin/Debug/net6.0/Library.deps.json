@@ -9,7 +9,10 @@
       "Library/1.0.0": {
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
+          "FluentValidation.DependencyInjectionExtensions": "11.7.1",
           "Library.Data": "1.0.0",
+          "Library.Repository": "1.0.0",
+          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "6.0.21",
           "Microsoft.EntityFrameworkCore": "6.0.21",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.21",
           "Microsoft.EntityFrameworkCore.Tools": "6.0.21",
@@ -44,6 +47,26 @@
           "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {
             "assemblyVersion": "12.0.0.0",
             "fileVersion": "12.0.1.0"
+          }
+        }
+      },
+      "FluentValidation/11.7.1": {
+        "runtime": {
+          "lib/net6.0/FluentValidation.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.7.1.0"
+          }
+        }
+      },
+      "FluentValidation.DependencyInjectionExtensions/11.7.1": {
+        "dependencies": {
+          "FluentValidation": "11.7.1",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.7.1.0"
           }
         }
       },
@@ -613,6 +636,37 @@
         }
       },
       "MessagePackAnalyzer/2.1.152": {},
+      "Microsoft.AspNetCore.Http.Features/5.0.17": {
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "7.0.0",
+          "System.IO.Pipelines": "5.0.2"
+        }
+      },
+      "Microsoft.AspNetCore.JsonPatch/6.0.21": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.JsonPatch.dll": {
+            "assemblyVersion": "6.0.21.0",
+            "fileVersion": "6.0.2123.36438"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Mvc.NewtonsoftJson/6.0.21": {
+        "dependencies": {
+          "Microsoft.AspNetCore.JsonPatch": "6.0.21",
+          "Newtonsoft.Json": "13.0.1",
+          "Newtonsoft.Json.Bson": "1.0.2"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll": {
+            "assemblyVersion": "6.0.21.0",
+            "fileVersion": "6.0.2123.36438"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Razor.Language/6.0.0": {
         "runtime": {
           "lib/netstandard2.0/Microsoft.AspNetCore.Razor.Language.dll": {
@@ -1020,7 +1074,7 @@
           "Microsoft.Bcl.AsyncInterfaces": "5.0.0",
           "Microsoft.CodeAnalysis.Common": "4.0.0",
           "System.Composition": "1.0.31",
-          "System.IO.Pipelines": "5.0.1"
+          "System.IO.Pipelines": "5.0.2"
         },
         "runtime": {
           "lib/netcoreapp3.1/Microsoft.CodeAnalysis.Workspaces.dll": {
@@ -1641,6 +1695,17 @@
           }
         }
       },
+      "Newtonsoft.Json.Bson/1.0.2": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.2.22727"
+          }
+        }
+      },
       "NuGet.Common/6.6.1": {
         "dependencies": {
           "NuGet.Frameworks": "6.6.1"
@@ -2150,7 +2215,7 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "System.IO.Pipelines/5.0.1": {},
+      "System.IO.Pipelines/5.0.2": {},
       "System.Linq/4.3.0": {
         "dependencies": {
           "System.Collections": "4.3.0",
@@ -2657,6 +2722,9 @@
       "Library.Data/1.0.0": {
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
+          "FluentValidation.DependencyInjectionExtensions": "11.7.1",
+          "Microsoft.AspNetCore.Http.Features": "5.0.17",
+          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "6.0.21",
           "Microsoft.EntityFrameworkCore": "6.0.21",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.21",
           "Microsoft.Extensions.Configuration": "7.0.0",
@@ -2666,6 +2734,14 @@
         },
         "runtime": {
           "Library.Data.dll": {}
+        }
+      },
+      "Library.Repository/1.0.0": {
+        "dependencies": {
+          "Library.Data": "1.0.0"
+        },
+        "runtime": {
+          "Library.Repository.dll": {}
         }
       }
     }
@@ -2689,6 +2765,20 @@
       "sha512": "sha512-+g/K+Vpe3gGMKGzjslMOdqNlkikScDjWfVvmWTayrDHaG/n2pPmFBMa+jKX1r/h6BDGFdkyRjAuhFE3ykW+r1g==",
       "path": "automapper.extensions.microsoft.dependencyinjection/12.0.1",
       "hashPath": "automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512"
+    },
+    "FluentValidation/11.7.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-w9Al4gls6iVGFbTd/NPOPlwzqDTghH+ntL4c4FYUatc+LeybpIwhYArLykZJP/VjF2n3ihj3ws+1yd7KR5lQlg==",
+      "path": "fluentvalidation/11.7.1",
+      "hashPath": "fluentvalidation.11.7.1.nupkg.sha512"
+    },
+    "FluentValidation.DependencyInjectionExtensions/11.7.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-q3R6mJ0SzWvHJkJ/9d4FAZeuhJp6Cv8WpQItRWyN0v5qxKtwZt6Ol/8HNv8THDOrywTdsNUVKpgDJalVY7hUdw==",
+      "path": "fluentvalidation.dependencyinjectionextensions/11.7.1",
+      "hashPath": "fluentvalidation.dependencyinjectionextensions.11.7.1.nupkg.sha512"
     },
     "Humanizer/2.14.1": {
       "type": "package",
@@ -3060,6 +3150,27 @@
       "sha512": "sha512-uJhZlGMkXDaFYsH8V9S6o1EyvsUqB9mpU4DVBXNr0DXZVzZMhuLP1IkLj5xK3EKlaAcvkFkZv3eSvuz360wb3Q==",
       "path": "messagepackanalyzer/2.1.152",
       "hashPath": "messagepackanalyzer.2.1.152.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Http.Features/5.0.17": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3jG2xS+dx8DDCGV/F+STdPTg89lX3ao3dF/VEPvJaz3wzBIjuadipTtYNEXDIVuOPZwb6jdmhrX9jkzOIBm5cw==",
+      "path": "microsoft.aspnetcore.http.features/5.0.17",
+      "hashPath": "microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.JsonPatch/6.0.21": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1rdeKxPYAJzJt3jfCtV7r16kS/e8uFmtrxcaVXm7kMOK2ccL2JXEuilzaMco07KnE+fOGEV/rNjSbXOIeu0VUA==",
+      "path": "microsoft.aspnetcore.jsonpatch/6.0.21",
+      "hashPath": "microsoft.aspnetcore.jsonpatch.6.0.21.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Mvc.NewtonsoftJson/6.0.21": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xqHVOEKMO1ISzyuOwOEClaj6cByYIj400POd9rfEN6/jZYUBW+POTX29KmqbTPiqVOvUCiVxc8S3VyaJ+bn4lw==",
+      "path": "microsoft.aspnetcore.mvc.newtonsoftjson/6.0.21",
+      "hashPath": "microsoft.aspnetcore.mvc.newtonsoftjson.6.0.21.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Razor.Language/6.0.0": {
       "type": "package",
@@ -3516,6 +3627,13 @@
       "path": "newtonsoft.json/13.0.1",
       "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
     },
+    "Newtonsoft.Json.Bson/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QYFyxhaABwmq3p/21VrZNYvCg3DaEoN/wUuw5nmfAf0X3HLjgupwhkEWdgfb9nvGAUIv3osmZoD3kKl4jxEmYQ==",
+      "path": "newtonsoft.json.bson/1.0.2",
+      "hashPath": "newtonsoft.json.bson.1.0.2.nupkg.sha512"
+    },
     "NuGet.Common/6.6.1": {
       "type": "package",
       "serviceable": true,
@@ -3915,12 +4033,12 @@
       "path": "system.io.filesystem.primitives/4.3.0",
       "hashPath": "system.io.filesystem.primitives.4.3.0.nupkg.sha512"
     },
-    "System.IO.Pipelines/5.0.1": {
+    "System.IO.Pipelines/5.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-qEePWsaq9LoEEIqhbGe6D5J8c9IqQOUuTzzV6wn1POlfdLkJliZY3OlB0j0f17uMWlqZYjH7txj+2YbyrIA8Yg==",
-      "path": "system.io.pipelines/5.0.1",
-      "hashPath": "system.io.pipelines.5.0.1.nupkg.sha512"
+      "sha512": "sha512-Iew+dfa6FFiyvWBdRmXApixRY1db+beyutpIck4SOSe0NLM8FD/7AD54MscqVLhvfSMLHO7KadjTRT7fqxOGTA==",
+      "path": "system.io.pipelines/5.0.2",
+      "hashPath": "system.io.pipelines.5.0.2.nupkg.sha512"
     },
     "System.Linq/4.3.0": {
       "type": "package",
@@ -4280,6 +4398,11 @@
       "hashPath": "system.xml.xdocument.4.3.0.nupkg.sha512"
     },
     "Library.Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Library.Repository/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
