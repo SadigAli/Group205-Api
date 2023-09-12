@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.21" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.21" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.21" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.21" />
@@ -26,11 +27,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Library.Data\Library.Data.csproj" />
+    <ProjectReference Include="..\Library.Helpers\Library.Helpers.csproj" />
     <ProjectReference Include="..\Library.Repository\Library.Repository.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\uploads\" />
+    <Folder Include="wwwroot\uploads\books\" />
   </ItemGroup>
 
 </Project>

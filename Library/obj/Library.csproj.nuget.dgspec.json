@@ -52,6 +52,10 @@
               "target": "Package",
               "version": "[5.0.17, )"
             },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.21, )"
+            },
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
               "version": "[6.0.21, )"
@@ -85,6 +89,71 @@
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
               "version": "[7.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\Library.Helpers\\Library.Helpers.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\Library.Helpers\\Library.Helpers.csproj",
+        "projectName": "Library.Helpers",
+        "projectPath": "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\Library.Helpers\\Library.Helpers.csproj",
+        "packagesPath": "C:\\Users\\sadig\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\Library.Helpers\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\sadig\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\Library.Repository\\Library.Repository.csproj": {
+                "projectPath": "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\Library.Repository\\Library.Repository.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.21, )"
             }
           },
           "imports": [
@@ -146,6 +215,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.21, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -193,6 +268,9 @@
               "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\Library.Data\\Library.Data.csproj": {
                 "projectPath": "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\Library.Data\\Library.Data.csproj"
               },
+              "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\Library.Helpers\\Library.Helpers.csproj": {
+                "projectPath": "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\Library.Helpers\\Library.Helpers.csproj"
+              },
               "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\Library.Repository\\Library.Repository.csproj": {
                 "projectPath": "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\Library.Repository\\Library.Repository.csproj"
               }
@@ -216,6 +294,10 @@
             "FluentValidation.DependencyInjectionExtensions": {
               "target": "Package",
               "version": "[11.7.1, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.21, )"
             },
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",

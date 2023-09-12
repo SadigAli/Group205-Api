@@ -1,0 +1,17 @@
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Helpers\bin\Debug\net6.0\Library.Helpers.deps.json
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Helpers\bin\Debug\net6.0\Library.Helpers.dll
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Helpers\bin\Debug\net6.0\Library.Helpers.pdb
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Helpers\bin\Debug\net6.0\Library.Data.dll
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Helpers\bin\Debug\net6.0\Library.Repository.dll
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Helpers\bin\Debug\net6.0\Library.Repository.pdb
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Helpers\bin\Debug\net6.0\Library.Data.pdb
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Helpers\obj\Debug\net6.0\Library.Helpers.csproj.AssemblyReference.cache
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Helpers\obj\Debug\net6.0\Library.Helpers.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Helpers\obj\Debug\net6.0\Library.Helpers.AssemblyInfoInputs.cache
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Helpers\obj\Debug\net6.0\Library.Helpers.AssemblyInfo.cs
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Helpers\obj\Debug\net6.0\Library.Helpers.csproj.CoreCompileInputs.cache
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Helpers\obj\Debug\net6.0\Library.Helpers.csproj.CopyComplete
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Helpers\obj\Debug\net6.0\Library.Helpers.dll
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Helpers\obj\Debug\net6.0\refint\Library.Helpers.dll
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Helpers\obj\Debug\net6.0\Library.Helpers.pdb
+C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library.Helpers\obj\Debug\net6.0\ref\Library.Helpers.dll

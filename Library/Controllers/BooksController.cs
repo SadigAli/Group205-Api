@@ -9,6 +9,7 @@ using Library.Data.Entities;
 using Library.Data.DTOs.Book;
 using AutoMapper;
 using FluentValidation;
+using Library.Repository.Contracts;
 
 namespace Library.Controllers
 {
@@ -16,32 +17,25 @@ namespace Library.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private readonly ApplicationContext _context;
         private readonly IMapper _mapper;
         private readonly IValidator<PostBookDTO> _validator;
-        private readonly IWebHostEnvironment _env;
+        private readonly IBookRepository _bookRepository;
+        private readonly IFileRepository _fileRepository;
 
-        public BooksController(ApplicationContext context, IMapper mapper,IValidator<PostBookDTO> validator, IWebHostEnvironment env)
+        public BooksController(IMapper mapper,IValidator<PostBookDTO> validator, IBookRepository bookRepository, IFileRepository fileRepository)
         {
-            _context = context;
             _mapper = mapper;
             _validator = validator;
-            _env = env;
+            _bookRepository = bookRepository;
+            _fileRepository = fileRepository;
         }
 
         // GET: api/Books
         [HttpGet]
         public async Task<ActionResult> GetBooks()
         {
-            if (_context.Books == null)
-            {
-                return NotFound();
-            }
-            List<Book> books = await _context.Books.Where(x => x.DeletedAt == null)
-                .Include(x=>x.Genre)
-                .Include(x=>x.BookAuthors)
-                .ThenInclude(x=>x.Author)
-                .ToListAsync();
+            if (await _bookRepository.GetAll() == null) return NotFound();
+            List<Book> books = await _bookRepository.GetAll();
             List<GetBookDTO> data = _mapper.Map<List<GetBookDTO>>(books);
             return Ok(data);
         }
@@ -50,11 +44,9 @@ namespace Library.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult> GetBook(int id)
         {
-            if (_context.Books == null)
-            {
-                return NotFound();
-            }
-            var book = await _context.Books.Where(x => x.DeletedAt == null).FirstOrDefaultAsync(x => x.Id == id);
+            if (await _bookRepository.GetAll() == null) return NotFound();
+
+            var book = await _bookRepository.GetBookDetails(id);
 
             if (book == null)
             {
@@ -67,22 +59,29 @@ namespace Library.Controllers
         // PUT: api/Books/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBook(int id, Book book)
+        public async Task<IActionResult> PutBook(int id, [FromForm]PostBookDTO model)
         {
-            if (id != book.Id)
+            Book book = await _bookRepository.GetBookDetails(id);
+            if (book is null)
             {
                 return BadRequest();
             }
+            if(model.File != null)
+            {
+                _fileRepository.DeleteFile("books", book.Image);
+                book.Image = await _fileRepository.FileUpload("books", model.File);
+            }
+            _bookRepository.UpdateBook(model, book);
+            await _bookRepository.Save();
 
-            _context.Entry(book).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _bookRepository.Save();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BookExists(id))
+                if (!await BookExists(id))
                 {
                     return NotFound();
                 }
@@ -100,10 +99,7 @@ namespace Library.Controllers
         [HttpPost]
         public async Task<ActionResult<Book>> PostBook([FromForm]PostBookDTO model)
         {
-            if (_context.Books == null)
-            {
-                return Problem("Entity set 'ApplicationContext.Books'  is null.");
-            }
+            if (await _bookRepository.GetAll() == null) return NotFound();
             var validateResult = await _validator.ValidateAsync(model);
             if (!validateResult.IsValid)
             {
@@ -112,31 +108,14 @@ namespace Library.Controllers
             string filePath = "";
             if(model.File != null)
             {
-                string folderPath = Path.Combine(_env.WebRootPath, "uploads", "books"); // C:\Users\sadig\OneDrive\Desktop\Group205-Api\Library\wwwroot\uploads\books
-                filePath = Guid.NewGuid() + "_" + model.File.FileName;
-                string fullPath = Path.Combine(folderPath, filePath);
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-                using(FileStream stream = new FileStream(fullPath, FileMode.Create))
-                {
-                    await model.File.CopyToAsync(stream);
-                }
+                filePath = await _fileRepository.FileUpload("books", model.File);
             }
 
             Book book = _mapper.Map<Book>(model);
-            book.BookAuthors = new List<BookAuthor>();
-            foreach (var authorId in model.AuthorIds)
-            {
-                book.BookAuthors.Add(new BookAuthor
-                {
-                    AuthorId = authorId,
-                });
-            }
+            _bookRepository.AddAuthor(book, model.AuthorIds);
             book.Image = filePath;
-            _context.Books.Add(book);
-            await _context.SaveChangesAsync();
+            await _bookRepository.Add(book);
+            await _bookRepository.Save();
 
             return CreatedAtAction("GetBook", new { id = book.Id }, book);
         }
@@ -145,25 +124,22 @@ namespace Library.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBook(int id)
         {
-            if (_context.Books == null)
-            {
-                return NotFound();
-            }
-            var book = await _context.Books.Where(x => x.DeletedAt == null).FirstOrDefaultAsync(x => x.Id == id);
+            if (await _bookRepository.GetAll() == null) return NotFound();
+            var book = await _bookRepository.GetById(id);
             if (book == null)
             {
                 return NotFound();
             }
-
-            book.DeletedAt = DateTime.Now;
-            await _context.SaveChangesAsync();
+            _fileRepository.DeleteFile("books", book.Image);
+            _bookRepository.Delete(book);
+            _bookRepository.Save();
 
             return NoContent();
         }
 
-        private bool BookExists(int id)
+        private Task<bool> BookExists(int id)
         {
-            return (_context.Books?.Any(e => e.Id == id)).GetValueOrDefault();
+            return _bookRepository.IsExists(id);
         }
     }
 }

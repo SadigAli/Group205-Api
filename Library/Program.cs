@@ -1,6 +1,7 @@
 using FluentValidation;
 using Library.Data.Entities;
 using Library.Data.Mappers;
+using Library.Helpers;
 using Library.Repository.Contracts;
 using Library.Repository.Implementations;
 using Microsoft.EntityFrameworkCore;
@@ -24,8 +25,7 @@ namespace Library
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(typeof(MapProfile));
-            builder.Services.AddScoped<IGenreRepository, GenreRepository>();
-            builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+            builder.Services.AddServices();
             builder.Services.AddDbContext<ApplicationContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection"));

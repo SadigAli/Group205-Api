@@ -1,20 +1,8 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\Library\\wwwroot\\uploads\\books\\33723ce4-50b8-4ef9-bcf5-a473c42b0682_tv.jpg",
-      "PackagePath": "staticwebassets\\uploads\\books\\33723ce4-50b8-4ef9-bcf5-a473c42b0682_tv.jpg"
-    },
-    {
-      "Id": "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\Library\\wwwroot\\uploads\\books\\6f62d86c-60ff-4805-ba91-7d8a050f0805_tv.jpg",
-      "PackagePath": "staticwebassets\\uploads\\books\\6f62d86c-60ff-4805-ba91-7d8a050f0805_tv.jpg"
-    },
-    {
-      "Id": "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\Library\\wwwroot\\uploads\\books\\c81f128d-c12c-4d66-bbca-04c45977cc7c_tv.jpg",
-      "PackagePath": "staticwebassets\\uploads\\books\\c81f128d-c12c-4d66-bbca-04c45977cc7c_tv.jpg"
-    },
-    {
-      "Id": "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\Library\\wwwroot\\uploads\\books\\e0f746ca-52bf-4872-9fbb-93ed1f4c39fe_book.jpg",
-      "PackagePath": "staticwebassets\\uploads\\books\\e0f746ca-52bf-4872-9fbb-93ed1f4c39fe_book.jpg"
+      "Id": "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\Library\\wwwroot\\uploads\\books\\d6902276-19ec-4d69-a754-00f4f5e13166_qarpiz.jpg",
+      "PackagePath": "staticwebassets\\uploads\\books\\d6902276-19ec-4d69-a754-00f4f5e13166_qarpiz.jpg"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.Library.Microsoft.AspNetCore.StaticWebAssets.props",

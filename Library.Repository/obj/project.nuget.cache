@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "NZFAymS4F1PnTHRv4R815J4DodwB2kDYvboWZz8/2FutASFyuZ/TgJcWPyTdMw5+0iGyZKCd2SLFS7x13pge5g==",
+  "dgSpecHash": "teRYn5BJgwGJOvTy8EGHVt1lCVgK7OMhpYsOcfNbvr1nPz61W+kH5aC/wMqmHdedGP5vzyVYspdZKOR3fQQM1Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\sadig\\OneDrive\\Desktop\\Group205-Api\\Library.Repository\\Library.Repository.csproj",
   "expectedPackageFiles": [
@@ -8,7 +8,10 @@
     "C:\\Users\\sadig\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\sadig\\.nuget\\packages\\fluentvalidation\\11.7.1\\fluentvalidation.11.7.1.nupkg.sha512",
     "C:\\Users\\sadig\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.7.1\\fluentvalidation.dependencyinjectionextensions.11.7.1.nupkg.sha512",
+    "C:\\Users\\sadig\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.21\\microsoft.aspnetcore.cryptography.internal.6.0.21.nupkg.sha512",
+    "C:\\Users\\sadig\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.21\\microsoft.aspnetcore.cryptography.keyderivation.6.0.21.nupkg.sha512",
     "C:\\Users\\sadig\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
+    "C:\\Users\\sadig\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\6.0.21\\microsoft.aspnetcore.identity.entityframeworkcore.6.0.21.nupkg.sha512",
     "C:\\Users\\sadig\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\6.0.21\\microsoft.aspnetcore.jsonpatch.6.0.21.nupkg.sha512",
     "C:\\Users\\sadig\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\6.0.21\\microsoft.aspnetcore.mvc.newtonsoftjson.6.0.21.nupkg.sha512",
     "C:\\Users\\sadig\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
@@ -30,6 +33,8 @@
     "C:\\Users\\sadig\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\7.0.0\\microsoft.extensions.fileproviders.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\sadig\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\7.0.0\\microsoft.extensions.fileproviders.physical.7.0.0.nupkg.sha512",
     "C:\\Users\\sadig\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\7.0.0\\microsoft.extensions.filesystemglobbing.7.0.0.nupkg.sha512",
+    "C:\\Users\\sadig\\.nuget\\packages\\microsoft.extensions.identity.core\\6.0.21\\microsoft.extensions.identity.core.6.0.21.nupkg.sha512",
+    "C:\\Users\\sadig\\.nuget\\packages\\microsoft.extensions.identity.stores\\6.0.21\\microsoft.extensions.identity.stores.6.0.21.nupkg.sha512",
     "C:\\Users\\sadig\\.nuget\\packages\\microsoft.extensions.logging\\6.0.0\\microsoft.extensions.logging.6.0.0.nupkg.sha512",
     "C:\\Users\\sadig\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\sadig\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
