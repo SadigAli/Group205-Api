@@ -4,6 +4,7 @@ using Library.Data.Mappers;
 using Library.Helpers;
 using Library.Repository.Contracts;
 using Library.Repository.Implementations;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Library
@@ -31,6 +32,12 @@ namespace Library
                 options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection"));
             });
 
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 8;
+            }).AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
             builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
             var app = builder.Build();
 

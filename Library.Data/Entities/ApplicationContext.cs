@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
 namespace Library.Data.Entities
 {
-    public class ApplicationContext : DbContext
+    public class ApplicationContext : IdentityDbContext<AppUser>
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
@@ -15,6 +16,7 @@ namespace Library.Data.Entities
         public DbSet<Author> Authors { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<BookAuthor> BookAuthors { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
     }
 
     public class DbContextFactory : IDesignTimeDbContextFactory<ApplicationContext>
