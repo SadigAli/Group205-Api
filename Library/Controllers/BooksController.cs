@@ -10,11 +10,13 @@ using Library.Data.DTOs.Book;
 using AutoMapper;
 using FluentValidation;
 using Library.Repository.Contracts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Library.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BooksController : ControllerBase
     {
         private readonly IMapper _mapper;

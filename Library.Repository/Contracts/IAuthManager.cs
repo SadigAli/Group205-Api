@@ -9,8 +9,8 @@ namespace Library.Repository.Contracts
 {
     public interface IAuthManager
     {
-        public Task Login(LoginDTO login);
-        public Task Register(RegisterDTO register);
+        public Task<(int,string)> Login(LoginDTO login);
+        public Task<(int,string)> Register(RegisterDTO register);
         public Task Logout();
     }
 }

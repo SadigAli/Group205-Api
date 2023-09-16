@@ -4,8 +4,11 @@ using Library.Data.Mappers;
 using Library.Helpers;
 using Library.Repository.Contracts;
 using Library.Repository.Implementations;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Library
 {
@@ -38,6 +41,27 @@ namespace Library
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 8;
             }).AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(opt =>
+            {
+                opt.SaveToken = true;
+                opt.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = builder.Configuration["JWT:Issuer"],
+                    ValidAudience = builder.Configuration["JWT:Audiance"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecretKey"]))
+                }
+                ;
+            });
+
             builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
             var app = builder.Build();
 
@@ -51,6 +75,7 @@ namespace Library
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
